@@ -9,11 +9,16 @@
 <div class="example-wrapper">
     <h1> Posts  ✅</h1>
 
-    This friendly message is coming from:
+    {% for category in categories %}
+    {% if loop.first %} {{ '{{ Not First }}' }}{% else %} {{ 'else' }} {% endif %}
+    <h2> {{ category.title2 }}</h2>
     <ul>
-        {% for post in posts %}
+        {% for post in category.posts %}
             <li><a href="{{ path('article', {'articleId' : post.id}) }}">{{ post.title }}</a></li>
         {% endfor %}
     </ul>
+    {% else %}
+        Категорий не найдено!
+    {% endfor %}
 </div>
 {% endblock %}
