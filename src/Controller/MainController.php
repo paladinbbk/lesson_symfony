@@ -7,7 +7,7 @@ use App\Entity\Post;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-EntityRepository::
+
 class MainController extends Controller
 {
     /**

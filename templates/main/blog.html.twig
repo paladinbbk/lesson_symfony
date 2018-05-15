@@ -11,7 +11,7 @@
 
     {% for category in categories %}
     {% if loop.first %} {{ '{{ Not First }}' }}{% else %} {{ 'else' }} {% endif %}
-    <h2> {{ category.title2 }}</h2>
+    <h2> {{ category.title }}</h2>
     <ul>
         {% for post in category.posts %}
             <li><a href="{{ path('article', {'articleId' : post.id}) }}">{{ post.title }}</a></li>
