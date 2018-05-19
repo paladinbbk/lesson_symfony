@@ -28,6 +28,14 @@ class Category
      */
     private $posts;
 
+    /**
+     * @param mixed $id
+     */
+    public function __toString()
+    {
+        return $this->title ? $this->title : 'NEW';
+    }
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();

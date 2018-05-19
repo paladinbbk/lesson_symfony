@@ -4,9 +4,11 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Post;
+use App\Repository\CategoryRepository;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class MainController extends Controller
 {
@@ -23,9 +25,9 @@ class MainController extends Controller
     /**
      * @Route("/blog", name="blog")
      */
-    public function blog()
+    public function blog(CategoryRepository $categoryRepository)
     {
-        $categories = $this->getDoctrine()->getRepository(Category::class)->findAll();
+        $categories = $categoryRepository->findAll();
 
         return $this->render('main/blog.html.twig', compact('categories'));
     }
