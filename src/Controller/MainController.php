@@ -33,12 +33,10 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/article/{articleId}", name="article")
+     * @Route("/article/{post}", name="article")
      */
-    public function article($articleId)
+    public function article(Post $post)
     {
-        $post = $this->getDoctrine()->getRepository(Post::class)->find($articleId);
-
         return $this->render('main/article.html.twig', [
             'post' => $post,
         ]);
