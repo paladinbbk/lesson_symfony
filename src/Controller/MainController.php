@@ -33,7 +33,8 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/article/{post}", name="article")
+     * @Route("/article/{postSlug}", name="article")
+     * @ParamConverter("post", options={"mapping": {"postSlug": "slug"}})
      */
     public function article(Post $post)
     {
