@@ -33,10 +33,11 @@ class MainController extends Controller
     }
 
     /**
-     * @Route("/article/{postSlug}", name="article")
+     * @Route("/{categorySlug}/{postSlug}", name="article")
      * @ParamConverter("post", options={"mapping": {"postSlug": "slug"}})
+     * @ParamConverter("category", options={"mapping": {"categorySlug": "slug"}})
      */
-    public function article(Post $post)
+    public function article(Post $post, Category $category)
     {
         return $this->render('main/article.html.twig', [
             'post' => $post,
