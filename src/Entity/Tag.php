@@ -33,6 +33,11 @@ class Tag
         $this->posts = new ArrayCollection();
     }
 
+    public function __toString()
+    {
+        return $this->title ? $this->title : 'new';
+    }
+
     public function getId()
     {
         return $this->id;
