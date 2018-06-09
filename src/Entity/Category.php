@@ -34,6 +34,16 @@ class Category
     private $slug;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="children")
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Category", mappedBy="parent")
+     */
+    private $children;
+
+    /**
      * @param mixed $id
      */
     public function __toString()
@@ -44,6 +54,7 @@ class Category
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->children = new ArrayCollection();
     }
 
     public function getId()
@@ -105,4 +116,31 @@ class Category
 
         return $this;
     }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getChildren(): Collection
+    {
+        return $this->children;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param mixed $parent
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
 }
