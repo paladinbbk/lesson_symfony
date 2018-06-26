@@ -23,8 +23,10 @@ class PostRepository extends ServiceEntityRepository
     public function getPostsByCategory(Category $category)
     {
         return $this->createQueryBuilder('post')
-            ->where('post.parent = NULL')
-            ->setParameter('cat', $category)
+            ->addSelect('category.name')
+            ->innerJoin('post.category', 'category')
+            ->where('category.parent = NULL')
+          //  ->setParameter('cat', $category)
             ->getQuery()
             ->getResult()
             ;

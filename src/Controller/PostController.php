@@ -57,6 +57,7 @@ class PostController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $post->setCategory($post);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('post_edit', ['id' => $post->getId()]);

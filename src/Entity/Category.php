@@ -43,6 +43,12 @@ class Category
      */
     private $children;
 
+
+    public function getParentName()
+    {
+        return 'message.no_parent';
+    }
+
     /**
      * @param mixed $id
      */

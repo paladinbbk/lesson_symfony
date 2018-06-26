@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Model\PostTrait;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Post
 {
+    use PostTrait;
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -48,10 +51,16 @@ class Post
      */
     private $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\PostImage", mappedBy="post")
+     */
+    private $postImages;
+
     public function __construct()
     {
         $this->created_at = new \DateTime();
         $this->tags = new ArrayCollection();
+        $this->postImages = new ArrayCollection();
     }
 
     public function getId()
@@ -146,6 +155,37 @@ class Post
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|PostImage[]
+     */
+    public function getPostImages(): Collection
+    {
+        return $this->postImages;
+    }
+
+    public function addPostImage(PostImage $postImage): self
+    {
+        if (!$this->postImages->contains($postImage)) {
+            $this->postImages[] = $postImage;
+            $postImage->setPost($this);
+        }
+
+        return $this;
+    }
+
+    public function removePostImage(PostImage $postImage): self
+    {
+        if ($this->postImages->contains($postImage)) {
+            $this->postImages->removeElement($postImage);
+            // set the owning side to null (unless already changed)
+            if ($postImage->getPost() === $this) {
+                $postImage->setPost(null);
+            }
+        }
 
         return $this;
     }
