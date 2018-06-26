@@ -10,4 +10,9 @@
 
     {{ post.content |raw }}
 </div>
+<form action="{{ path('add_to_cart',{'product': post.id}) }}">
+    {#<input type="hidden" name="productId" value="{{ post.id }}">#}
+    <input type="number" name="quantity" value="1">
+    <button type="submit">ADD</button>
+</form>
 {% endblock %}

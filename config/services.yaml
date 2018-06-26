@@ -32,3 +32,6 @@ services:
 
     App\Service\MyManager:
         public: true
+
+    App\Service\CartManager:
+        public: true
